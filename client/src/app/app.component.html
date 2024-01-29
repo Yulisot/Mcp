@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+</head>
+
+<body>
+  <h1>{{ title }}</h1>
+
+  <label for="idSearch">Search by ID:</label>
+  <input type="number" id="idSearch" [(ngModel)]="searchId" (click)="clearSearchByName()">
+  <button (click)="searchById()">Search</button>
+
+  <label for="nameSearch">Search by Name:</label>
+  <input type="text" id="nameSearch" [(ngModel)]="searchName"(click)="clearSearchById()">
+  <button (click)="searchByName()">Search</button>
+
+  <div *ngIf="!clientInfo" class="user-list">
+    <div class="user-box" *ngFor="let user of users">
+      <h3>{{ user.clientName }}</h3>
+      <p>ID: {{ user.id }}</p>
+      <p>Airtime: {{ user.clientAirtime | date:'dd/MM/yyyy' }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="clientInfo" class="user-box">
+    <h3>{{ clientInfo.clientName }}</h3>
+    <p>ID: {{ clientInfo.id }}</p>
+    <p>Airtime: {{ clientInfo.clientAirtime | date:'dd/MM/yyyy' }}</p>
+  </div>
+
