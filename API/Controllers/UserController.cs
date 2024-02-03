@@ -31,8 +31,8 @@ namespace API.Controllers
             return user;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Client>>> GetClientsWithCompanies() // api/user
+        [HttpGet]// api/user
+        public async Task<ActionResult<IEnumerable<Client>>> GetClientsWithCompanies() 
         {
             var clientsWithCompanies = await _context.Clients
                 .Include(u => u.Companies)
@@ -41,7 +41,23 @@ namespace API.Controllers
             return clientsWithCompanies;
         }
 
+                [HttpGet("ById/{clientId}")]//api/user/ById/1//
+
+        public async Task<ActionResult<Client>> GetClientById(int clientId)
+        {
+            var client = await _context.Clients
+                .Include(u => u.Companies)
+                .FirstOrDefaultAsync(u => u.Id == clientId);
+
+            if (client == null)
+            {
+                return NotFound($"Client with Id {clientId} not found.");
+            }
+
+            return client;
+        }
     }
 }
+
 
 
