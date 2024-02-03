@@ -1,32 +1,65 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
 }
 
-h1 {
-  color: #333;
+.search-container {
+  margin-bottom: 20px;
 }
 
-label {
-  display: block;
+.search-container input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-container button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.client-details {
   margin-top: 10px;
+
 }
 
-input, button {
-  margin-top: 5px;
+.details-section {
   margin-bottom: 10px;
 }
 
-.user-list {
-  display: flex;
-  flex-wrap: wrap;
+.detail-label {
+  font-weight: bold;
 }
 
-.user-box {
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+.table th, .table td {
   border: 1px solid #ddd;
-  padding: 5px;
-  margin: 5px;
-  width: 150px;
-  box-sizing:content-box;
+  padding: 8px;
+  text-align: left;
 }
 
+.table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.company-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.company-list li {
+  margin-bottom: 5px;
+}

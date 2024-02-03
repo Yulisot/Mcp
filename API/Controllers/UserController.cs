@@ -3,40 +3,45 @@ using API.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers;
-
-
-[ApiController]
-[Route("api/[controller]")]
-public class UserController : ControllerBase
+namespace API.Controllers
 {
-    private readonly DataContext _context;
-
-    public UserController(DataContext context)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UserController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly DataContext _context;
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Client>>> GetClients()
-    {
-        var clients =await  _context.Clients.ToListAsync();
+        public UserController(DataContext context)
+        {
+            _context = context;
+        }
 
-        return clients;
-    }
+        [HttpGet("{userName}")]
+        public async Task<ActionResult<Client>> GetUser(string userName)
+        {
+            var user = await _context.Clients
+                .Include(u => u.Companies)
+                .FirstOrDefaultAsync(u => u.Name == userName);
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Client>> GetClient(int id)
-    {
+            if (user == null)
+            {
+                return NotFound($"User {userName} not found.");
+            }
 
-        return await  _context.Clients.FindAsync(id);
-    }
+            return user;
+        }
 
-    [HttpGet("airtime")]
-    public IActionResult GetAirtime()
-    {
-        DateTime clientAirtime = DateTime.Now;
-        return Ok(clientAirtime.ToString("yyyy-MM-ddTHH:mm:ss"));
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Client>>> GetClientsWithCompanies() // api/user
+        {
+            var clientsWithCompanies = await _context.Clients
+                .Include(u => u.Companies)
+                .ToListAsync();
+
+            return clientsWithCompanies;
+        }
+
     }
 }
+
 
