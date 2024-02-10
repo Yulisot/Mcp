@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -8,55 +9,73 @@
         <button (click)="clearSearch()">Clear Search</button>
       </div>
 
-      <div class="clients-list">
+      <div class="clients-list-container">
         <h3>Clients List</h3>
-        <table class="table">
+        <table class="custom-table">
           <thead>
             <tr>
-              <th>Name</th>
               <th>ID</th>
+              <th>Name</th>
               <th>Created At</th>
               <th>Url</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let client of clients" (click)="selectClient(client)">
-              <td>{{ client.name }}</td>
               <td>{{ client.id }}</td>
+              <td>{{ client.name }}</td>
               <td>{{ client.createdAt | date:'dd/MM/yyyy' }}</td>
-              <td>{{client.url}}</td>
+              <td>{{ client.url }}</td>
             </tr>
           </tbody>
         </table>
+
+        <div class="company-list">
+          <h3>Companies List:</h3>
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>TikNikuiim</th>
+                <th>Client ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let company of getClientCompanies(selectedClient?.id)" (click)="selectCompany(company)">
+                <td>{{ company.id }}</td>
+                <td>{{ company.name }}</td>
+                <td>{{ company.tikNikuiim}}</td>
+                <td>{{ company.clientId }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
     <div class="col-md-6">
-      <div *ngIf="selectedClient" class="client-details">
-        <h2>Client Details</h2>
-        <div class="details-section">
-          <span class="detail-label">Name:</span>
-          <span class="detail-value">{{ selectedClient.name }}</span>
-        </div>
-        <div class="details-section">
-          <span class="detail-label">ID:</span>
-          <span class="detail-value">{{ selectedClient.id }}</span>
-        </div>
-
-        <h3>Companies under the selected client:</h3>
-        <table class="table">
+      <div *ngIf="selectedClient" class="user-details-container">
+        <h2>Users List:</h2>
+        <table class="custom-table" *ngIf="clientInfo && clientInfo.$values">
           <thead>
             <tr>
-              <th>Company Name</th>
+              <th>User ID</th>
+              <th>Client</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Birthday</th>
               <th>Company ID</th>
-              <th>Client iD</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let company of getClientCompanies(selectedClient.id)">
-              <td>{{ company.name }}</td>
-              <td>{{ company.id }}</td>
-              <td>{{company.clientId}}</td>
+            <tr *ngFor="let user of clientInfo.$values">
+              <td>{{ user.idNum }}</td>
+              <td>{{ user.clientId }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.leda | date:'dd/MM/yyyy'}}</td>
+              <td>{{ user.companyId }}</td>
             </tr>
           </tbody>
         </table>

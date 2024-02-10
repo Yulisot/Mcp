@@ -3,6 +3,7 @@ using API.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace API.Controllers
 {
     [ApiController]
@@ -16,48 +17,47 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet("{userName}")]
-        public async Task<ActionResult<Client>> GetUser(string userName)
-        {
-            var user = await _context.Clients
-                .Include(u => u.Companies)
-                .FirstOrDefaultAsync(u => u.Name == userName);
-
-            if (user == null)
-            {
-                return NotFound($"User {userName} not found.");
-            }
-
-            return user;
-        }
-
-        [HttpGet]// api/user
-        public async Task<ActionResult<IEnumerable<Client>>> GetClientsWithCompanies() 
+        [HttpGet] // api/user
+        public async Task<ActionResult<IEnumerable<Client>>> GetClients()
         {
             var clientsWithCompanies = await _context.Clients
                 .Include(u => u.Companies)
                 .ToListAsync();
 
             return clientsWithCompanies;
-        }
+        }  
+        [HttpGet("ByClient/{clientId}")] // GET: api/User/ByClient/1
 
-                [HttpGet("ById/{clientId}")]//api/user/ById/1//
-
-        public async Task<ActionResult<Client>> GetClientById(int clientId)
+        public async Task<ActionResult<IEnumerable<User>>> GetUsersByClient(int clientId)
         {
-            var client = await _context.Clients
-                .Include(u => u.Companies)
-                .FirstOrDefaultAsync(u => u.Id == clientId);
+            var users = await _context.Users
+                .Where(u => u.ClientId == clientId)
+                .ToListAsync();
 
-            if (client == null)
+            if (users == null || users.Count == 0)
             {
-                return NotFound($"Client with Id {clientId} not found.");
+                return NotFound();
             }
 
-            return client;
+            return users;
         }
+
+        [HttpGet("ByCompany/{companyId}")] // GET: api/User/ByCompany/1
+        public async Task<ActionResult<IEnumerable<User>>> GetUsersByCompany(int companyId)
+        {
+            var users = await _context.Users
+                .Where(u => u.CompanyId == companyId)
+                .ToListAsync();
+
+            if (users == null || users.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return users;
+        }
+
     }
 }
-
 
 

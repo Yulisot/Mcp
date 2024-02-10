@@ -1,65 +1,88 @@
-.container {
-  max-width: 800px;
-  margin: 0 auto;
+body, h1, h2, h3, p, ul, li, table {
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Arial', sans-serif;
-  cursor: pointer;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 .search-container {
   margin-bottom: 20px;
 }
 
-.search-container input {
+input {
   padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  margin-right: 8px;
+  width: 60%;
 }
 
-.search-container button {
+button {
   padding: 8px 12px;
-  background-color: #007bff;
+  cursor: pointer;
+  background-color: #3498db;
   color: #fff;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 5px;
 }
 
-.client-details {
-  margin-top: 10px;
-
+button:hover {
+  background-color: #2980b9;
 }
 
-.details-section {
-  margin-bottom: 10px;
-}
-
-.detail-label {
-  font-weight: bold;
-}
-
-.table {
+.custom-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
-.table th, .table td {
+.custom-table th, .custom-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
 
-.table th {
-  background-color: #007bff;
+.custom-table th {
+  background-color: #3498db;
   color: #fff;
 }
 
-.company-list {
-  list-style-type: none;
-  padding: 0;
+.clients-list-container tbody tr,
+.company-list tbody tr {
+  cursor: pointer;
 }
 
-.company-list li {
-  margin-bottom: 5px;
+.user-details-container {
+  margin-top: 105px;
+}
+
+.company-list {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
