@@ -1,19 +1,24 @@
-body, h1, h2, h3, p, ul, li, table {
-  margin: 0;
-  padding: 0;
+
+
+.top {
+  background: linear-gradient(135deg, #f6f4e8, #E59560);
+  color: #1D3124;
+  padding: 20px;
+  text-align: left;
 }
 
-*, *:before, *:after {
-  box-sizing: border-box;
-}
 
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background-color: #BACEC1;
+  margin: 0;
+  padding: 0;
+  left: 100;
 }
 
+
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -34,20 +39,20 @@ body {
 
 input {
   padding: 8px;
-  margin-right: 8px;
-  width: 60%;
+  margin-right: 10px;
+  width: 20%;
 }
 
 button {
   padding: 8px 12px;
   cursor: pointer;
-  background-color: #3498db;
+  background-color: #E59560;
   color: #fff;
   border: none;
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: #1D3124;
 }
 
 .custom-table {
@@ -63,26 +68,53 @@ button:hover {
 }
 
 .custom-table th {
-  background-color: #3498db;
+  background-color: #1D3124;
   color: #fff;
 }
 
 .clients-list-container tbody tr,
 .company-list tbody tr {
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.user-details-container {
-  margin-top: 105px;
+.clients-list-container tbody tr.selected,
+.company-list tbody tr.selected {
+  background-color: #d4edda;
 }
+
 
 .company-list {
   margin-top: 20px;
+  width: 100%;
 }
 
-@media screen and (max-width: 767px) {
-  .col-md-6 {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+.list-container {
+  max-height: 240px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #1D3124 #f9f9f9;
+}
+
+.company-list,
+.user-details-container {
+  max-height: 240px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #1D3124 #f9f9f9;
+}
+
+.list-container-user {
+  position: relative;
+  top: 0;
+  right: 0;
+  max-height: 400px;
+  width: 50%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 20px;
 }

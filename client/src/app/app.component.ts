@@ -71,7 +71,10 @@ export class AppComponent implements OnInit {
         this.selectedClient = null;
         this.clientInfo = null;
       }
+
     }
+    else
+    alert('Please insert a value in the search field.');
   }
 
   getClientCompanies(clientId: number): any[] {
@@ -99,6 +102,7 @@ export class AppComponent implements OnInit {
     this.selectedCompany = company;
     this.fetchUsersByCompanyId(company.id);
   }
+
 
 }
 

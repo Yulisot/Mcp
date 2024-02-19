@@ -17,7 +17,7 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet] // api/user
+        [HttpGet] // api/client with company
         public async Task<ActionResult<IEnumerable<Client>>> GetClients()
         {
             var clientsWithCompanies = await _context.Clients
