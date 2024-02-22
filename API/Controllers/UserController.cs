@@ -28,7 +28,7 @@ namespace API.Controllers
         }  
         [HttpGet("ByClient/{clientId}")] // GET: api/User/ByClient/1
 
-        public async Task<ActionResult<IEnumerable<User>>> GetUsersByClient(int clientId)
+        public async Task<ActionResult<List<User>>> GetUsersByClient(int clientId)
         {
             var users = await _context.Users
                 .Where(u => u.ClientId == clientId)

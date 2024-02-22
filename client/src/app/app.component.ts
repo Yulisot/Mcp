@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { environment } from 'config';
+
 
 @Component({
   selector: 'app-root',
@@ -10,15 +12,17 @@ import { environment } from 'config';
 export class AppComponent implements OnInit {
   title = 'MCP';
   clients: any[] = [];
-  searchTerm: string = '';
   clientInfo: any = null;
   selectedClient: any;
   selectedCompany: any;
+  managerList: any[] = [];
+  LogoUrl = 'https://www.hilan.co.il/images/bg-logo-new.png';
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     this.fetchClients();
   }
 
@@ -57,11 +61,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  search(): void {
-    if (this.searchTerm.trim() !== '') {
+  search(inputValue: string): void {
+    if (inputValue.trim() !== '') {
       const foundClient = this.clients.find((client: any) =>
-        client.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        client.id.toString() === this.searchTerm.trim()
+        client.name.toLowerCase().includes(inputValue.toLowerCase()) ||
+        client.id.toString() === inputValue.trim()
       );
 
       if (foundClient) {
@@ -71,10 +75,9 @@ export class AppComponent implements OnInit {
         this.selectedClient = null;
         this.clientInfo = null;
       }
-
+    } else {
+      alert('Please insert a value in the search field.');
     }
-    else
-    alert('Please insert a value in the search field.');
   }
 
   getClientCompanies(clientId: number): any[] {
@@ -87,10 +90,11 @@ export class AppComponent implements OnInit {
     return client.companies.$values;
   }
 
-  clearSearch(): void {
-    this.searchTerm = '';
+  clearSearch(searchInput: HTMLInputElement): void {
     this.clientInfo = null;
     this.selectedClient = null;
+    this.managerList = [];
+    searchInput.value = '';
   }
 
   selectClient(client: any) {
@@ -103,6 +107,27 @@ export class AppComponent implements OnInit {
     this.fetchUsersByCompanyId(company.id);
   }
 
+  getFilteredClients(): any[] {
+    if (this.selectedClient) {
+      return this.clients.filter(client => client.id === this.selectedClient.id);
+    }
+    return this.clients;
+  }
+
+
+  updateManagerList(user: any): void {
+    user.selected = !user.selected;
+    if (user.selected) {
+      this.managerList.push({
+        id: user.idNum,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        companyId: user.companyId
+      });
+    } else {
+      this.managerList = this.managerList.filter(manager => manager.id !== user.idNum);
+    }
+  }
 
 }
 
