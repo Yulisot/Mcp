@@ -4,19 +4,11 @@ namespace API.DTOS
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        // public DateTime CreatedAt { get; set; }
-        // public DateTime? DisabledAt { get; set; }
-        public List<CompanyDTO> Companies { get; set; } = new List<CompanyDTO>();
-    }
-
-    public class CompanyDTO
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string Url { get; set; }
+
         public DateTime? DisabledAt { get; set; }
-        public int MessageOption { get; set; }
+        public List<CompanyDTO> Companies { get; set; } 
     }
 }
 
-//not in use//

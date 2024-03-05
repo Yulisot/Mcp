@@ -22,6 +22,7 @@ namespace API.Customer
         public byte[] LastChange { get; set; }
 
         public Client Client { get; set; }
+        
         public List<User> Users { get; set; }
     }
 }
