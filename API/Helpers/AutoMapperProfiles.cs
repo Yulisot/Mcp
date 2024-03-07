@@ -7,9 +7,12 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Company, CompanyDTO>().MaxDepth(1); 
-            CreateMap<Client, ClientDTO>().MaxDepth(1);   
-            CreateMap<User, UserDTO>();
+            CreateMap<Company, CompanyDto>().MaxDepth(1); 
+            CreateMap<Client, ClientDto>().MaxDepth(1);   
+            CreateMap<User, UserDto>();
+            CreateMap<UserLogin, UserLoginDto>();
+            CreateMap<Emp, EmpDto>();
+            CreateMap<Paycheck, PaycheckDto>();
         }
     }
 }

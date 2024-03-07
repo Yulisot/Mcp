@@ -2,6 +2,7 @@ using API.Customer;
 using API.Database;
 using API.DTOS;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,21 +21,23 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{clientId}/companies")]
+        [HttpGet("{clientId}")]
         public async Task<ActionResult<IEnumerable<CompanyDTO>>> GetCompaniesByClientId(int clientId)
         {
-            var client = await _context.Clients
-                .Include(c => c.Companies)
-                .FirstOrDefaultAsync(c => c.Id == clientId);
+            var companies = await _context.Companies
+                .Where(c => c.ClientId == clientId)
+                .ProjectTo<CompanyDTO>(_mapper.ConfigurationProvider)
+                .ToListAsync();
 
-            if (client == null)
+            
+            if (companies == null)
             {
-                return NotFound($"Client with ID {clientId} not found");
+                return NotFound();
             }
 
-            var companies = client.Companies.ToList();
-            var companiesToReturn = _mapper.Map<IEnumerable<CompanyDTO>>(companies);
-            return Ok(companiesToReturn);
+            // var companies = client.Companies.ToList();
+            // var companiesToReturn = _mapper.Map<IEnumerable<CompanyDTO>>(companies);
+            return Ok(companies);
         }
     }
 }

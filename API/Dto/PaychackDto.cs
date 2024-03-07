@@ -1,6 +1,6 @@
 namespace API.DTOS
 {
-    public class PaycheckDTO
+    public class PaycheckDto
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }
@@ -14,7 +14,7 @@ namespace API.DTOS
         public byte[] LastChange { get; set; }
         public int? ExternalType { get; set; }
 
-        public EmpDTO Employee { get; set; }
+        public EmpDto Employee { get; set; }
 
     }
 

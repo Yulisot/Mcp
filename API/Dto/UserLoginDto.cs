@@ -1,6 +1,6 @@
 namespace API.DTOS
 {
-    public class UserLoginDTO
+    public class UserLoginDto
     {
             public int Id { get; set; }
         public int UserId { get; set; }
@@ -8,7 +8,7 @@ namespace API.DTOS
         public string LastName { get; set; }
         public DateTime LoginTime { get; set; }
 
-        public UserDTO User { get; set; }
+        public UserDto User { get; set; }
     }
 
 }

@@ -15,7 +15,7 @@ namespace API.Customer
         public short? P43_01_ByShifts { get; set; }
         public short? P43_Semel_Work_Item { get; set; }
         public short? IdType { get; set; }
-        public short MessageOption { get; set; }
+        // public short MessageOption { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? DisabledAt { get; set; }
         public string ParamJsonComp { get; set; }

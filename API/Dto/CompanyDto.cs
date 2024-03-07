@@ -1,6 +1,6 @@
 namespace API.DTOS
 {
-    public class CompanyDTO
+    public class CompanyDto
     {
         public int ClientId { get; set; }
 
@@ -11,8 +11,8 @@ namespace API.DTOS
         public int MessageOption { get; set; }
         public long? TikNikuiim { get; set; }
         
-        public ClientDTO Client { get; set; }
-        public List<UserDTO> Users { get; set; }
+        public ClientDto Client { get; set; }
+        public List<UserDto> Users { get; set; }
 
     }
 }

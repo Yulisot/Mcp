@@ -1,6 +1,6 @@
 namespace API.DTOS
 {
-    public class ClientDTO
+    public class ClientDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -8,7 +8,7 @@ namespace API.DTOS
         public string Url { get; set; }
 
         public DateTime? DisabledAt { get; set; }
-        public List<CompanyDTO> Companies { get; set; } 
+        public List<CompanyDto> Companies { get; set; } 
     }
 }
 

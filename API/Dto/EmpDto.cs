@@ -1,6 +1,6 @@
 namespace API.DTOS
 {
-    public class EmpDTO
+    public class EmpDto
     {
 
         public int Id { get; set; }
@@ -14,7 +14,7 @@ namespace API.DTOS
         public string FirstNameEng { get; set; }
         public string LastNameEng { get; set; }
 
-        public UserDTO User { get; set; }
-        public List<PaycheckDTO> Paychecks { get; set; }
+        public UserDto User { get; set; }
+        public List<PaycheckDto> Paychecks { get; set; }
     }
 }
