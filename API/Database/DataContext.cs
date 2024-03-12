@@ -19,6 +19,11 @@ namespace API.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Client>()
+                .HasMany(c => c.Companies)
+                .WithOne(c => c.Client)
+                .HasForeignKey(c => c.ClientId);
+
             modelBuilder.Entity<Company>()
                 .HasOne(c => c.Client)
                 .WithMany(client => client.Companies)

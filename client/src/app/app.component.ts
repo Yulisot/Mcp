@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   selectedClient: any;
   selectedCompany: any;
   managerList: any[] = [];
+  clientCompanies: any[] =[];
   LogoUrl = 'https://www.hilan.co.il/images/bg-logo-new.png';
 
 
@@ -23,22 +24,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
-    this.fetchClients();
+
   }
 
-  fetchClients(): void {
-    this.http.get(`${environment.apiUrl}`).subscribe({
-      next: (response: any) => {
-        this.clients = response['$values'];
-        console.log('Clients:', this.clients);
-      },
-      error: error => console.error(error),
-      complete: () => console.log('Request has completed')
-    });
-  }
 
   fetchUsersByClientId(clientId: number): void {
-    const url = `${environment.apiUrl}/ByClient/${clientId}`;
+    const url = `${environment.apiUrl}user/${clientId}`;
     this.http.get(url).subscribe({
       next: (response: any) => {
         console.log('Fetched Users:', response);
@@ -49,17 +40,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  fetchUsersByCompanyId(companyId: number): void {
-    const url = `${environment.apiUrl}/ByCompany/${companyId}`;
-    this.http.get(url).subscribe({
-      next: (response: any) => {
-        console.log('Fetched Users by Company:', response);
-        this.clientInfo = response;
-      },
-      error: error => console.error('Error fetching users by Company:', error),
-      complete: () => console.log('User request by Company has completed')
-    });
-  }
+
 
   search(inputValue: string): void {
     if (inputValue.trim() !== '') {
@@ -71,6 +52,7 @@ export class AppComponent implements OnInit {
       if (foundClient) {
         this.selectedClient = foundClient;
         this.fetchUsersByClientId(foundClient.id);
+        // this.fetchCompanyByClientId(foundClient.id)
       } else {
         this.selectedClient = null;
         this.clientInfo = null;
@@ -83,29 +65,31 @@ export class AppComponent implements OnInit {
   getClientCompanies(clientId: number): any[] {
     const client = this.clients.find((c: any) => c.id === clientId);
 
-    if (!client || !client.companies || !client.companies.$values) {
+    if (!client || !client.companies) {
       return [];
     }
 
-    return client.companies.$values;
+    return client.companies;
   }
 
   clearSearch(searchInput: HTMLInputElement): void {
     this.clientInfo = null;
     this.selectedClient = null;
     this.managerList = [];
+    this.clientCompanies=[];
     searchInput.value = '';
   }
 
   selectClient(client: any) {
     this.selectedClient = client;
+    // this.fetchCompanyByClientId(client.id);
     this.fetchUsersByClientId(client.id);
   }
 
-  selectCompany(company: any) {
-    this.selectedCompany = company;
-    this.fetchUsersByCompanyId(company.id);
-  }
+  // selectCompany(company: any) {
+  //   this.selectedCompany = company;
+  //   this.fetchCompanyByClientId(company.id);
+  // }
 
   getFilteredClients(): any[] {
     if (this.selectedClient) {
@@ -115,19 +99,19 @@ export class AppComponent implements OnInit {
   }
 
 
-  updateManagerList(user: any): void {
-    user.selected = !user.selected;
-    if (user.selected) {
-      this.managerList.push({
-        id: user.idNum,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        companyId: user.companyId
-      });
-    } else {
-      this.managerList = this.managerList.filter(manager => manager.id !== user.idNum);
-    }
-  }
+  // updateManagerList(user: any): void {
+  //   user.selected = !user.selected;
+  //   if (user.selected) {
+  //     this.managerList.push({
+  //       id: user.idNum,
+  //       firstName: user.firstName,
+  //       lastName: user.lastName,
+  //       companyId: user.companyId
+  //     });
+  //   } else {
+  //     this.managerList = this.managerList.filter(manager => manager.id !== user.idNum);
+  //   }
+  // }
 
 }
 

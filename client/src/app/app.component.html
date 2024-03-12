@@ -1,20 +1,14 @@
 
-
 <body>
-  <!-- <div class="topnav">
-  <img [src]="LogoUrl" alt="Hilan Logo" />
-  </div> -->
   <div class="top">
-    <!-- <h1>{{ title }}</h1> -->
     <img [src]="LogoUrl" alt="Hilan Logo" />
-
     <div class="search-container">
       <input type="text" placeholder="Search by name or ID" #searchInput />
       <button (click)="search(searchInput.value)">Search</button>
       <button (click)="clearSearch(searchInput)">Clear Search</button>
     </div>
   </div>
-
+<!--
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -31,11 +25,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let client of getFilteredClients()"
-                  (click)="selectClient(client)"
-                  [class.selected]="client === selectedClient"
-                >
+                <tr *ngFor="let client of getFilteredClients()" (click)="selectClient(client)" [class.selected]="client === selectedClient">
                   <td>{{ client.id }}</td>
                   <td>{{ client.name }}</td>
                   <td>{{ client.createdAt | date : "dd/MM/yyyy" }}</td>
@@ -45,7 +35,6 @@
             </table>
           </div>
         </div>
-
 
         <div class="list-container-companies">
           <div class="company-list">
@@ -60,10 +49,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let company of getClientCompanies(selectedClient?.id)"
-                  (click)="selectCompany(company)"
-                >
+                <tr *ngFor="let company of clientCompanies">
                   <td>{{ company.id }}</td>
                   <td>{{ company.name }}</td>
                   <td>{{ company.tikNikuiim }}</td>
@@ -72,8 +58,6 @@
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
 
 
       <div class="col-md-6">
@@ -81,41 +65,34 @@
           <div *ngIf="selectedClient" class="user-details-container">
             <h3>Users List:</h3>
 
-            <table class="custom-table" *ngIf="clientInfo && clientInfo.$values">
+            <table class="custom-table" *ngIf="clientInfo && clientInfo.length > 0">
               <thead>
                 <tr>
                   <th>User ID</th>
                   <th>Client</th>
+                  <th>Company</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Birthday</th>
                   <th>Company ID</th>
-                  <th>Manager</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let user of clientInfo.$values">
+                <tr *ngFor="let user of clientInfo">
                   <td>{{ user.idNum }}</td>
                   <td>{{ user.clientId }}</td>
+                  <td>{{ user.company?.name }}</td>
                   <td>{{ user.firstName }}</td>
                   <td>{{ user.lastName }}</td>
                   <td>{{ user.leda | date : "dd/MM/yyyy" }}</td>
                   <td>{{ user.companyId }}</td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      [checked]="user.selected"
-                      (change)="updateManagerList(user)"
-                    />
-                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
+        </div> -->
 
-
-        <div class="list-container-manager">
+        <!-- <div class="list-container-manager">
           <h3>Manager List:</h3>
           <table class="custom-table">
             <thead>
@@ -138,6 +115,8 @@
         </div>
       </div>
     </div>
-  </div>
-</body>
+  </div> -->
 
+
+  <app-client></app-client>
+  <app-company></app-company>

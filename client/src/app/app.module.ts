@@ -6,10 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClientComponent } from './client/client.component';
+import { CompanyComponent } from './company/company.component';
+import { ClientCompanyService } from '../app/services/client-company.service';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClientComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ClientCompanyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
