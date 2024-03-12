@@ -7,9 +7,14 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Company, CompanyDto>().MaxDepth(1); 
             CreateMap<Client, ClientDto>().MaxDepth(1);   
+            CreateMap<Company, CompanyDto>().MaxDepth(1); 
             CreateMap<User, UserDto>();
+            
+                // .ForMember(dest => dest.Logins, opt => opt.Ignore())
+                // .ForMember(dest => dest.Emps, opt => opt.Ignore())
+                // .ForMember(dest => dest.Company, opt => opt.Ignore());
+
             CreateMap<UserLogin, UserLoginDto>();
             CreateMap<Emp, EmpDto>();
             CreateMap<Paycheck, PaycheckDto>();

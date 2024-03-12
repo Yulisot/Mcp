@@ -24,23 +24,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle(this.title);
-    this.fetchClients();
 
   }
 
-  fetchClients(): void {
-    this.http.get(`${environment.apiUrl}client`).subscribe({
-      next: (response: any) => {
-        this.clients = response;
-        console.log('Clients:', this.clients);
-      },
-      error: error => console.error(error),
-      complete: () => console.log('Request has completed')
-    });
-  }
 
   fetchUsersByClientId(clientId: number): void {
-    const url = `${environment.apiUrl}user/${clientId}/users`;
+    const url = `${environment.apiUrl}user/${clientId}`;
     this.http.get(url).subscribe({
       next: (response: any) => {
         console.log('Fetched Users:', response);
@@ -51,17 +40,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  fetchCompanyByClientId(clientId: number): void {
-    const url = `${environment.apiUrl}Companies/${clientId}/companies`;
-    this.http.get(url).subscribe({
-      next: (response: any) => {
-        console.log('Fetched Companies by Client:', response);
-        this.clientCompanies = response;
-      },
-      error: error => console.error('Error fetching companies by Client:', error),
-      complete: () => console.log('Company request by Client has completed')
-    });
-  }
+
 
   search(inputValue: string): void {
     if (inputValue.trim() !== '') {
@@ -73,7 +52,7 @@ export class AppComponent implements OnInit {
       if (foundClient) {
         this.selectedClient = foundClient;
         this.fetchUsersByClientId(foundClient.id);
-        this.fetchCompanyByClientId(foundClient.id)
+        // this.fetchCompanyByClientId(foundClient.id)
       } else {
         this.selectedClient = null;
         this.clientInfo = null;
@@ -103,7 +82,7 @@ export class AppComponent implements OnInit {
 
   selectClient(client: any) {
     this.selectedClient = client;
-    this.fetchCompanyByClientId(client.id);
+    // this.fetchCompanyByClientId(client.id);
     this.fetchUsersByClientId(client.id);
   }
 

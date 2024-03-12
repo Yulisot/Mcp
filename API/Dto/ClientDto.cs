@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace API.DTOS
 {
     public class ClientDto
@@ -8,7 +10,10 @@ namespace API.DTOS
         public string Url { get; set; }
 
         public DateTime? DisabledAt { get; set; }
-        public List<CompanyDto> Companies { get; set; } 
+
+        [JsonIgnore]
+        public List<CompanyDto> Companies { get; set; }
+
     }
 }
 

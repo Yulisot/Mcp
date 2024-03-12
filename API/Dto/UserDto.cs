@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace  API.DTOS
 
 {
@@ -6,6 +8,8 @@ namespace  API.DTOS
     {
         public int ClientId { get; set; }
         public int Id { get; set; }
+        
+        [JsonIgnore]
         public int CompanyId { get; set; }
         public long OvedId { get; set; }
         public long IdNum { get; set; }
@@ -15,8 +19,14 @@ namespace  API.DTOS
         public DateTime CreatedAt { get; set; }
         public DateTime? DisabledAt { get; set; }
         public byte[] LastChange { get; set; }
+
+        [JsonIgnore]
         public CompanyDto Company { get; set; }
+
+        [JsonIgnore]
         public List<UserLoginDto> Logins { get; set; }
+
+        [JsonIgnore]
         public List<EmpDto> Emps { get; set; }
     }
 

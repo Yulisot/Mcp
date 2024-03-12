@@ -1,0 +1,38 @@
+/* Clients List Section */
+.list-container {
+  width: 100%; /* Adjust the width as needed */
+  margin-left: -100px;
+  margin-right: auto;
+}
+
+.clients-list-container {
+  margin-top: 20px;
+}
+
+.custom-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #655f5993;
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #335786;
+  color: #fff;
+}
+
+.clients-list-container tbody tr,
+.company-list tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clients-list-container tbody tr.selected,
+.company-list tbody tr.selected {
+  background-color: #e7e7e7;
+}

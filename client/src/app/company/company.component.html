@@ -1,0 +1,26 @@
+<div class="col-md-6">
+  <!-- Companies List Section on the Bottom Left -->
+  <div class="list-container-companies">
+    <div class="company-list">
+      <h3>Companies List:</h3>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Company ID</th>
+            <th>Company Name</th>
+            <th>TikNikuiim</th>
+            <th>Client ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of clientCompanies">
+            <td>{{ company.id }}</td>
+            <td>{{ company.name }}</td>
+            <td>{{ company.tikNikuiim }}</td>
+            <td>{{ company.clientId }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

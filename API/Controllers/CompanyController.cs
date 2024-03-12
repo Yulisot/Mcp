@@ -22,11 +22,11 @@ namespace API.Controllers
         }
 
         [HttpGet("{clientId}")]
-        public async Task<ActionResult<IEnumerable<CompanyDTO>>> GetCompaniesByClientId(int clientId)
+        public async Task<ActionResult<IEnumerable<CompanyDto>>> GetCompaniesByClientId(int clientId)
         {
             var companies = await _context.Companies
                 .Where(c => c.ClientId == clientId)
-                .ProjectTo<CompanyDTO>(_mapper.ConfigurationProvider)
+                .ProjectTo<CompanyDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             
@@ -35,8 +35,6 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            // var companies = client.Companies.ToList();
-            // var companiesToReturn = _mapper.Map<IEnumerable<CompanyDTO>>(companies);
             return Ok(companies);
         }
     }

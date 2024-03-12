@@ -1,0 +1,35 @@
+.list-container-companies {
+  width: 50%;
+  margin-left: 14px;
+  margin-right: auto;
+}
+
+.company-list {
+  margin-top: 20px;
+}
+
+.custom-table {
+  width: 168%;
+  margin-bottom: 20px;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #655f5993;
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #335786;
+  color: #fff;
+}
+
+.company-list tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.company-list tbody tr.selected {
+  background-color: #e7e7e7;
+}
